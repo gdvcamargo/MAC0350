@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #1b1b1c;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.footer {
+    display: flex;
+    width: 700px;
+    color: white;
+}
+
+.footer-text {
+    text-align: center;
+    text-justify: auto;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+    font-size: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+
+.profile-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: #262525;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.profile-main-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    color: white;
+}
+
+.profile-sub-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.profile-sub-row-text {
+    color: white;
+    font-size: 0.9rem;
+}
+
+.profile-image {
+    border-radius: 50%;
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.75);
+}
+
+.profile-link {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-round-link {
+    margin-top: 30px;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: #1b1b1c;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.profile-round-link:hover {
+    background-color: gray;
+}
+
+.profile-mail {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.profile-mail:hover {
+    color: #408080;
+    text-decoration: underline;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: 100%;
+}
