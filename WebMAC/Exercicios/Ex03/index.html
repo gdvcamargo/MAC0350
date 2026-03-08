@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exercício 3</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <main class="main-content">
+            <h1>Desafios para Casa: JavaScript Básico</h1>
+            <p style="font-weight: bold">Desafio 1: O Interruptor (Modo Claro/Escuro simples)</p>
+            <h2 id="texto-alvo" class="apagada">A luz está APAGADA</h2>
+            <button onclick="alternarLuz()">Alternar Luz</button>
+
+            <p style="font-weight: bold">Desafio 2: O Multiplicador</p>
+            <h1 id="multiplicador">2</h1>
+            <button onclick="dobrarValor()">Dobrar Valor</button>
+        </main>
+        <script>
+            let valor = 2;
+
+            function alternarLuz() {
+                const textoAlvo = document.getElementById("texto-alvo");
+                if (textoAlvo.textContent == "A luz está APAGADA") {
+                    textoAlvo.textContent = "A luz está ACESA";
+                    textoAlvo.classList = ["acesa"];
+                } else {
+                    textoAlvo.textContent = "A luz está APAGADA";
+                    textoAlvo.classList = ["apagada"];
+                }
+            }
+
+            function dobrarValor() {
+                valor *= 2;
+                document.getElementById("multiplicador").textContent = valor;
+                if (valor > 100) {
+                    alert(`Cuidado, o número ${valor} está ficando muito grande!`);
+                }
+            }
+        </script>
+    </body>
+</html>
