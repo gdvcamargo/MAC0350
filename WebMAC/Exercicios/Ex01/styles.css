@@ -29,6 +29,7 @@ body {
     display: flex;
     width: 700px;
     color: white;
+    margin-bottom: 20px;
 }
 
 .footer-text {
@@ -49,6 +50,10 @@ body {
     text-decoration: none;
     cursor: pointer;
     color: white;
+}
+
+.nav-link-selected {
+    color: gray;
 }
 
 .profile-card {
@@ -131,4 +136,46 @@ body {
     flex-direction: column;
     align-self: flex-start;
     height: 100%;
+}
+
+.content-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: #262525;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.content-card h2 {
+    color: white;
+}
+
+.content-card h3 {
+    color: white;
+    margin-top: -1rem;
+}
+
+.content-card ul {
+    color: white;
+    padding: 1rem;
+    margin-top: -1rem;
+}
+
+.content-card li {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.content-card li a {
+    color: gray;
+    text-decoration: none;
+}
+
+.content-card li a:hover {
+    text-decoration: underline;
 }
