@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block scripts %}
+    <script src="/static/scripts/users.js" ></script>
+{% endblock %}
+
+{% block content %}
+    <div class="page-container">
+        <h2>Cadastro de Usuário</h2>
+        <form class="form">
+            <div class="input-container">
+                <label for="name" class="input-label">Nome:</label>
+                <input type="text" id="name" name="name" required class="input"><br><br>
+            </div>
+            
+            <div class="input-container">
+                <label for="password" class="input-label">Senha:</label>
+                <input type="password" id="password" name="password" required class="input"><br><br>
+            </div>
+            
+            <button class="input-button" type="button" onclick="loginUser()">Login</button>
+        </form>
+    </div>
+{% endblock %}

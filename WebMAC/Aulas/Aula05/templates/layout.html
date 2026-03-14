@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebMAC - Aula 05</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/scripts/layout.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        {% if not logged_user %}
+            <a href="/" class="navbar-item">Entrar</a>
+            <a href="/sign-up" class="navbar-item">Registrar</a>
+        {% else %}
+            <a href="/home" class="navbar-item">Home</a>
+        {% endif %}
+    </nav>
+    <main class="main-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
