@@ -1,8 +1,10 @@
 1) Quais serão as informações que sua aplicação irá manipular? 
 
-A aplicação vai manipular viagens, roteiros de viagens e lugares. 
+A aplicação vai manipular viagens, roteiros de viagens e lugares.
 
-Uma viagem tem um nome, um destino, uma data de início, uma data de fim e um orçamento.
+Existe um usuário para autenticação e saber de quem aquela viagem pertence.
+
+Uma viagem tem um nome, um destino, uma data de início, uma data de fim e um orçamento. Pertence a um user_id (FK)
 
 Uma viagem possui zero ou mais roteiros de viagens, um roteiro de viagem tem uma duração (data de início e data de fim) e é 
 composto por items.
