@@ -1,0 +1,20 @@
+1) Quais serão as informações que sua aplicação irá manipular? 
+
+A aplicação vai manipular viagens, roteiros de viagens e lugares. 
+
+Uma viagem tem um nome, um destino, uma data de início, uma data de fim e um orçamento.
+
+Uma viagem possui zero ou mais roteiros de viagens, um roteiro de viagem tem uma duração (data de início e data de fim) e é 
+composto por items.
+
+Cada item de um roteiro é referente a um dia, um intervalo de tempo e lugares que serão visitados.
+
+Cada lugar tem um nome, descrição e um preço médio.
+
+2) Caso haja algum tipo de dado agrupado, existe algum tipo de relação entre estes grupos? 
+
+Existe várias relações, um roteiro de viagem com certo id (PK) está relacionado a um id de viagem (FK).
+Um item de roteiro tem um id (PK) e está relacionado a um id de roteiro (FK).
+Um item de roteiro possuem vários lugares e um lugar pode estar e um ou mais items de roteiros, uma relação n por n.
+
+A dupla (roteiro_id, lugar_id) forma uma PK constituidas por duas FK.
