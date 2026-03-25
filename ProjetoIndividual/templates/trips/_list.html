@@ -1,0 +1,7 @@
+{% if trips|length > 0 %}
+    {% for trip in trips %}
+        {% include "trips/_row.html" %}
+    {% endfor %}
+{% else %}
+    <p style="text-align: center; margin-top: 2rem; font-weight: bold; font-size: 20px;">Nenhuma viagem cadastrada.</p>
+{% endif %}

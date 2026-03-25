@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}Viagens - Projeto Individual WebMAC{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>🗺️ Minhas Viagens</h2>
+    
+    <!-- Formulário para criar nova viagem -->
+    <div style="margin: 20px 0; padding: 20px; background: #ecf0f1; border-radius: 4px;">
+        <h3>Criar Nova Viagem</h3>
+        <form hx-post="/trips/create" 
+              hx-target="#trips-list" 
+              hx-swap="beforeend"
+              style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="text" 
+                   name="name" 
+                   placeholder="Nome da viagem" 
+                   required
+                   style="flex: 1; padding: 8px; border: 1px solid #bdc3c7; border-radius: 4px;">
+            <button type="submit" class="btn">➕ Criar</button>
+        </form>
+    </div>
+    
+    <!-- Lista de viagens -->
+    <div id="trips-list" hx-get="/trips/list" hx-trigger="load">
+        <p>Carregando viagens...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block body_scripts %}
+<script>
+    // Configurações opcionais de HTMX
+    document.body.addEventListener('htmx:xhr:loadend', function(evt) {
+        console.log('Requisição completada:', evt.detail);
+    });
+</script>
+{% endblock %}

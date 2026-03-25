@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Projeto Individual WebMAC{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+    {% block scripts %}
+    {% endblock %}
+</head>
+<body hx-boost="true" hx-target="#app-content" hx-select="#app-content > *" hx-swap="innerHTML">
+    <nav id="app-navbar" class="navbar">
+        {% if not logged_user %}
+            <a href="/users/login" class="navbar-item">Entrar</a>
+            <a href="/users/register" class="navbar-item">Registrar</a>
+        {% else %}
+            <a href="/home" class="navbar-item">Home</a>
+            <a href="/trips" class="navbar-item">Viagens</a>
+        {% endif %}
+    </nav>
+    <main id="app-content" class="main-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% block body_scripts %}
+    {% endblock %}
+</body>
+</html>

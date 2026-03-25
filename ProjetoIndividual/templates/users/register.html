@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="auth-page-container">
+        <h2>Registro de Usuário</h2>
+        
+        <div id="error-message" class="error"></div>
+        
+        <form id="register-form" class="form" method="post" action="/users/register" hx-boost="false" onsubmit="registerUser(event)">
+            <div class="input-container">
+                <label for="name" class="input-label">Nome:</label>
+                <input type="text" id="name" name="name" required class="input"><br><br>
+            </div>
+            
+            <div class="input-container">
+                <label for="username" class="input-label">Usuário:</label>
+                <input type="text" id="username" name="username" required class="input"><br><br>
+            </div>
+            
+            <div class="input-container">
+                <label for="password" class="input-label">Senha:</label>
+                <input type="password" id="password" name="password" required class="input"><br><br>
+            </div>
+            
+            <button type="submit" class="input-button">Registrar</button>
+        </form>
+
+        <script src="/static/scripts/users.js"></script>
+    </div>
+{% endblock %}
+
+{% block body_scripts %}{% endblock %}

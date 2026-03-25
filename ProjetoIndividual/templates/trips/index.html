@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Viagens - Projeto Individual WebMAC{% endblock %}
+
+{% block content %}
+<div class="trip-page-container">
+    <h2 class="page-title">Viagens</h2>
+
+        <form id="trip-create-form"
+            class="form trip-form"
+            method="post"
+            action="/trips/"
+            hx-boost="false"
+            onsubmit="submitTrip(event)">
+        <input id="trip-is-update" type="hidden" value="false">
+        <input id="trip-id" type="hidden" value="">
+        <div class="input-container">
+            <label for="name" class="input-label">Nome</label>
+            <input id="name" name="name" type="text" class="input" required>
+        </div>
+
+        <div class="input-container">
+            <label for="destination" class="input-label">Destino</label>
+            <input id="destination" name="destination" type="text" class="input" required>
+        </div>
+
+        <div class="input-container">
+            <label for="start_date" class="input-label">Data de início</label>
+            <input id="start_date" name="start_date" type="date" class="input" required>
+        </div>
+
+        <div class="input-container">
+            <label for="end_date" class="input-label">Data de fim</label>
+            <input id="end_date" name="end_date" type="date" class="input" required>
+        </div>
+
+        <div class="input-container">
+            <label for="budget" class="input-label">Orçamento</label>
+            <input id="budget" name="budget" type="number" min="0" step="0.01" class="input" required>
+        </div>
+
+        <button id="trip-submit-button" type="submit" class="input-button trip-form-submit">Criar viagem</button>
+        <button id="trip-cancel-update" type="button" class="input-button trip-form-submit" onclick="cancelTripUpdate()" style="display: none;">Cancelar edição</button>
+    </form>
+
+    <div id="trips-list" class="trip-list">
+        <p>Carregando viagens...</p>
+    </div>
+
+    <script src="/static/scripts/trips.js"></script>
+</div>
+{% endblock %}

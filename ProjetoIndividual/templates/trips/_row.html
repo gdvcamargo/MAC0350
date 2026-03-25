@@ -1,0 +1,26 @@
+<div id="trip-{{ trip.id }}" class="trip-row">
+    <div class="trip-info">
+        <strong>{{ trip.name }}</strong>
+        <span><strong>Destino:</strong> {{ trip.destination }}</span>
+        <span><strong>Início:</strong> {{ trip.start_date }}</span>
+        <span><strong>Fim:</strong> {{ trip.end_date }}</span>
+        <span><strong>Orçamento:</strong> {{ "%.2f"|format(trip.budget) }}</span>
+    </div>
+
+    <div class="trip-actions">
+        <button class="input-button"
+                type="button"
+                data-trip-id="{{ trip.id }}"
+                data-name="{{ trip.name }}"
+                data-destination="{{ trip.destination }}"
+                data-start-date="{{ trip.start_date }}"
+                data-end-date="{{ trip.end_date }}"
+                data-budget="{{ trip.budget }}"
+                onclick="setTripUpdate(this)">
+            Editar
+        </button>
+        <button type="button" class="input-button" data-trip-id="{{ trip.id }}" onclick="deleteTrip(this)">
+            Excluir
+        </button>
+    </div>
+</div>
