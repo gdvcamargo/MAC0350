@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from sqlmodel import Session, select
 from datetime import datetime, timedelta
 
+from models.trip_models import Trip
 from models.user_models import User, UserCreate, UserSession
 from utils import generate_rand_token, hash_password
 
@@ -97,3 +98,25 @@ class UserRepository:
     def get_user_by_username(*, username: str, session: Session) -> User | None:
         statement = select(User).where(User.username == username)
         return session.exec(statement).first()
+
+    @staticmethod
+    def delete_user_account(*, user_id: int, session: Session) -> None:
+        user = UserRepository.get_user_by_id(user_id=user_id, session=session)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Usuario nao encontrado",
+            )
+
+        trip_statement = select(Trip).where(Trip.user_id == user_id)
+        trips = session.exec(trip_statement).all()
+        for trip in trips:
+            session.delete(trip)
+
+        session_statement = select(UserSession).where(UserSession.user_id == user_id)
+        sessions = session.exec(session_statement).all()
+        for user_session in sessions:
+            session.delete(user_session)
+
+        session.delete(user)
+        session.commit()

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Perfil - Projeto Individual WebMAC{% endblock %}
+
+{% block content %}
+<div class="home-page-container">
+    <h2 class="page-title">Meu Perfil</h2>
+
+    <div class="profile-card">
+        <p><strong>Nome:</strong> {{ logged_user.name }}</p>
+        <p><strong>Usuário:</strong> {{ logged_user.username_display }}</p>
+        <p><strong>Total de viagens:</strong> {{ total_trips }}</p>
+        <p><strong>Total gasto em viagens:</strong> R$ {{ total_spend }}</p>
+    </div>
+
+    <div id="profile-message" class="error"></div>
+
+    <button type="button" class="input-button danger-button" onclick="deleteMyAccount(event)">
+        Excluir minha conta
+    </button>
+
+    <script src="/static/scripts/users.js"></script>
+</div>
+{% endblock %}

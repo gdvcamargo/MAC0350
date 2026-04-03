@@ -216,6 +216,25 @@
     margin-top: 2rem;
 }
 
+.profile-card {
+    width: min(520px, 92vw);
+    background-color: #dbdbdb;
+    border: 1px solid #408080;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.danger-button {
+    background-color: #aa3a3a;
+}
+
+.danger-button:hover {
+    background-color: #8d2e2e;
+}
+
 
 @media (min-width: 800px) {
     .trip-page-container {

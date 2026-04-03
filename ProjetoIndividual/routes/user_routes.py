@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from db import SessionDep
-from middlwares.auth_middlwares import LoggedUser
+from middlwares.auth_middlwares import AuthUser, LoggedUser
 from models.user_models import UserCreate, UserLogin
 from repositories.user_repositories import UserRepository, UserSessionRepository
 from utils import must_be_int, verify_password
@@ -56,11 +56,29 @@ def login_page(request: Request, logged_user: LoggedUser) -> Response:
     )
 
 
+@router.get("/profile")
+def profile_page(request: Request, user: AuthUser) -> Response:
+    total_trips = len(user.trips)
+    total_spend = sum(trip.budget for trip in user.trips)
+    return templates.TemplateResponse(
+        request=request,
+        name="/users/profile.html",
+        context={
+            "logged_user": user,
+            "total_trips": total_trips,
+            "total_spend": total_spend,
+        },
+    )
+
+
 @router.post("/login")
 def login_user(
     input: UserLogin, session: SessionDep, response: Response
 ) -> JSONResponse:
-    user = UserRepository.get_user_by_username(username=input.username, session=session)
+    user = UserRepository.get_user_by_username(
+        username=input.username.lower(),
+        session=session,
+    )
     if not user:
         return JSONResponse(
             content={"message": "Credenciais inválidas"},
@@ -86,8 +104,8 @@ def login_user(
 
 
 @router.get("/logout")
-def logout_user(response: Response, session: SessionDep) -> JSONResponse:
-    token = response.cookies.get("session")
+def logout_user(request: Request, session: SessionDep) -> JSONResponse:
+    token = request.cookies.get("session")
     if not token:
         return JSONResponse(
             content={"message": "Usuário não autenticado"},
@@ -106,5 +124,13 @@ def logout_user(response: Response, session: SessionDep) -> JSONResponse:
         id=must_be_int(user_session.id), session=session
     )
     response = JSONResponse(content={"message": "Logout realizado com sucesso"})
+    response.delete_cookie(key="session")
+    return response
+
+
+@router.delete("/me")
+def delete_current_user(user: AuthUser, session: SessionDep) -> JSONResponse:
+    UserRepository.delete_user_account(user_id=must_be_int(user.id), session=session)
+    response = JSONResponse(content={"message": "Conta excluida com sucesso"})
     response.delete_cookie(key="session")
     return response

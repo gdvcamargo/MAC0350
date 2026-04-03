@@ -18,7 +18,8 @@
         {% else %}
             <a href="/home" class="navbar-item">Home</a>
             <a href="/trips" class="navbar-item">Viagens</a>
-            <button hx-get="/users/logout" hx-target="body" hx-swap="outerHTML" class="navbar-item navbar-logout">Sair</button>
+            <a href="/users/profile" class="navbar-item">Perfil</a>
+            <button hx-get="/users/logout" hx-on::after-request="if(event.detail.successful){ window.location.href='/home'; }" class="navbar-item navbar-logout">Sair</button>
         {% endif %}
     </nav>
     <main id="app-content" class="main-container">
