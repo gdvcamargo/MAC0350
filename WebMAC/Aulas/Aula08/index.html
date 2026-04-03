@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WebMAC - Aula 08</title>
+        <script src="https://unpkg.com/htmx.org@1.9.12"></script> <!-- Import do HTMX -->
+        <style>
+            body {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                margin: 0;
+                background: #f4f7fb;
+                color: #123;
+            }
+
+            .site-header {
+                background: #0f4c81;
+                color: #fff;
+                padding: 1.25rem 1rem;
+            }
+
+            .site-header h1 {
+                margin: 0;
+                font-size: 1.35rem;
+            }
+
+            .site-nav {
+                display: flex;
+                gap: 0.5rem;
+                padding: 0.75rem 1rem;
+                background: #d9e6f2;
+                border-bottom: 1px solid #b8cce0;
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                border: 1px solid #5b84ae;
+                border-radius: 0.5rem;
+                background: #ffffff;
+                color: #0f4c81;
+                padding: 0.45rem 0.8rem;
+                font-weight: 700;
+                cursor: pointer;
+            }
+
+            .tab-btn.active {
+                background: #0f4c81;
+                color: #fff;
+                border-color: #0f4c81;
+            }
+
+            .tab-content {
+                padding: 1rem;
+                max-width: 860px;
+            }
+
+            #likes-section {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+                margin-top: 0.75rem;
+            }
+
+            .card {
+                background: #fff;
+                border: 1px solid #cedaea;
+                border-radius: 0.75rem;
+                padding: 1rem;
+                line-height: 1.45;
+            }
+        </style>
+    </head>
+    <body>
+        <header class="site-header">
+            <h1>Aula 08 - WebMAC</h1>
+        </header>
+
+        <nav class="site-nav">
+            <button class="tab-btn {% if aba_ativa == 'curtidas' %}active{% endif %}"
+                    hx-get="/home/curtidas"
+                    hx-target="body"
+                    hx-swap="innerHTML"
+                    hx-push-url="true">Curtidas</button>
+            <button class="tab-btn {% if aba_ativa == 'jupiter' %}active{% endif %}"
+                    hx-get="/home/jupiter"
+                    hx-target="body"
+                    hx-swap="innerHTML"
+                    hx-push-url="true">Jupiter</button>
+            <button class="tab-btn {% if aba_ativa == 'professor' %}active{% endif %}"
+                    hx-get="/home/professor"
+                    hx-target="body"
+                    hx-swap="innerHTML"
+                    hx-push-url="true">Professor</button>
+        </nav>
+
+        <button style="display: none;"
+                hx-get="{% if aba_ativa == 'curtidas' %}/home/jupiter{% elif aba_ativa == 'jupiter' %}/home/professor{% else %}/home/curtidas{% endif %}"
+                hx-trigger="keyup[shiftKey&&(key=='p'||key=='P')] from:body"
+                hx-target="body"
+                hx-swap="innerHTML"
+                hx-push-url="true">
+            Alternar aba
+        </button>
+
+        <main class="tab-content">
+            {% if aba_ativa == 'curtidas' %}
+                <section class="card">
+                    <h2>Aba Curtidas</h2>
+                    <p>Gerencie seu contador de curtidas abaixo.</p>
+                    <section id="likes-section">
+                        <strong id="likes-count">Curtidas: {{ curtidas or 0 }}</strong>
+                        <button hx-post="/curtir"
+                                hx-target="#likes-count"
+                                hx-swap="outerHTML">
+                            Curtir!
+                        </button>
+                        <button hx-delete="/curtir"
+                                hx-target="#likes-count"
+                                hx-swap="outerHTML"
+                                hx-confirm="Tem certeza que deseja remover todas as curtidas?">
+                            Remover curtidas
+                        </button>
+                    </section>
+                </section>
+            {% elif aba_ativa == 'jupiter' %}
+                <section class="card">
+                    <h2>Jupiter Web</h2>
+                    <form>
+                        <p><label for="usuario">Usuario:</label></p>
+                        <p><input id="usuario" type="text" placeholder="Digite seu usuario"></p>
+                        <p><label for="senha">Senha:</label></p>
+                        <p><input id="senha" type="password" placeholder="Digite sua senha"></p>
+                        <p><button type="button">Entrar</button></p>
+                    </form>
+                </section>
+            {% else %}
+                <section class="card">
+                    <p><strong>Kelly Rosa Braghetto</strong> - Professora Assistente</p>
+                    <p>Departamento de Ciencia da Computacao - IME USP</p>
+                    <p>Interesses: Banco de Dados, BPM, Workflows e Metodos Formais.</p>
+                </section>
+            {% endif %}
+        </main>
+
+    </body>
+</html>
