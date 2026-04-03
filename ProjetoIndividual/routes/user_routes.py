@@ -83,3 +83,21 @@ def login_user(
         expires=int(user_session.expires_at.timestamp()),
     )
     return response
+
+
+@router.get("/logout")
+def logout_user(
+    response: Response, logged_user: LoggedUser, session: SessionDep
+) -> JSONResponse:
+    if not logged_user:
+        return JSONResponse(
+            content={"message": "Usuário não autenticado"},
+            status_code=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    UserSessionRepository.delete_session(
+        token=logged_user.session_token, session=session
+    )
+    response = JSONResponse(content={"message": "Logout realizado com sucesso"})
+    response.delete_cookie(key="session")
+    return response
