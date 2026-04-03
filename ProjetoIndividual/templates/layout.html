@@ -18,6 +18,7 @@
         {% else %}
             <a href="/home" class="navbar-item">Home</a>
             <a href="/trips" class="navbar-item">Viagens</a>
+            <button hx-get="/users/logout" hx-target="body" hx-swap="outerHTML" class="navbar-item navbar-logout">Sair</button>
         {% endif %}
     </nav>
     <main id="app-content" class="main-container">

@@ -39,6 +39,14 @@
     cursor: pointer;
     color: white;
 }
+
+.navbar-logout {
+    background: #408080;
+    border: 1px solid #408080;
+    border-radius: 1rem;
+    font: inherit;
+}
+
 .navbar-item:hover {
     background-color: #306060;
     border-radius: 0.2rem;
