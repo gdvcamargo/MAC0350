@@ -14,6 +14,8 @@ class UserSession(SQLModel, table=True):
     token: str = Field(index=True, unique=True)
     expires_at: datetime
 
+    user: "User" = Relationship(back_populates="sessions")
+
 
 class User(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -23,6 +25,7 @@ class User(SQLModel, table=True):
     name: str
 
     trips: list["Trip"] = Relationship(back_populates="user")
+    sessions: list[UserSession] = Relationship(back_populates="user")
 
 
 class UserCreate(BaseModel):

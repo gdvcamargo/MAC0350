@@ -86,17 +86,24 @@ def login_user(
 
 
 @router.get("/logout")
-def logout_user(
-    response: Response, logged_user: LoggedUser, session: SessionDep
-) -> JSONResponse:
-    if not logged_user:
+def logout_user(response: Response, session: SessionDep) -> JSONResponse:
+    token = response.cookies.get("session")
+    if not token:
         return JSONResponse(
             content={"message": "Usuário não autenticado"},
             status_code=status.HTTP_401_UNAUTHORIZED,
         )
 
+    user_session = UserSessionRepository.get_session_by_token(
+        token=token, session=session
+    )
+    if not user_session:
+        return JSONResponse(
+            content={"message": "Usuário não autenticado"},
+            status_code=status.HTTP_401_UNAUTHORIZED,
+        )
     UserSessionRepository.delete_session(
-        token=logged_user.session_token, session=session
+        id=must_be_int(user_session.id), session=session
     )
     response = JSONResponse(content={"message": "Logout realizado com sucesso"})
     response.delete_cookie(key="session")

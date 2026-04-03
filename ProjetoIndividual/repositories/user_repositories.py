@@ -18,6 +18,11 @@ class UserSessionRepository:
         return user_session
 
     @staticmethod
+    def get_session_by_token(*, token: str, session: Session) -> UserSession | None:
+        statement = select(UserSession).where(UserSession.token == token)
+        return session.exec(statement).first()
+
+    @staticmethod
     def get_user_by_token(*, token: str, session: Session) -> User | None:
         statement = select(UserSession).where(UserSession.token == token)
         user_session = session.exec(statement).first()
