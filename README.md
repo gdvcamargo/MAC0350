@@ -38,3 +38,8 @@ Uma vez criado as tabelas basta rodar o fastapi:
 fastapi dev app.py
 ```
 
+### Transparência
+
+Foi utilizado o [Github Copilot](https://github.com/features/copilot) para auxiliar o desenvolvimento do frontend, em específico na parte do htmx,
+css e para tirar algumas dúvidas pontuais.
+
